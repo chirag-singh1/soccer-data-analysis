@@ -90,7 +90,7 @@ def run_analysis(competitions, percentage_adjust):
     print(half_time_lead_count)
 
     #Adjust raw win numbers relative to total number if applicable
-    if percentage_adjust=='True':
+    if percentage_adjust:
         for i in range(10):
             if half_time_lead_count[i] > 0:
                 half_time_leading_team_win_count[i]/=half_time_lead_count[i]
@@ -101,14 +101,18 @@ def run_analysis(competitions, percentage_adjust):
     #Place bars on graph
     x=np.arange(10)
     plt.bar(x, half_time_leading_team_win_count, color='green')
-    plt.bar(x, half_time_draw_count, bottom=half_time_leading_team_win_count, color='yellow')
+    plt.bar(x, half_time_draw_count, bottom=half_time_leading_team_win_count, color='orange')
     plt.bar(x, half_time_leading_team_loss_count, bottom=loss_base, color='red')
 
     #Draw graph with labels/legend/etc.
     plt.legend(labels=['Leading Team Win','Draw','Leading Team Loss'])
     plt.xticks(np.arange(start=0,stop=6))
     plt.xlabel('Halftime Lead')
-    plt.ylabel('Result Frequency Percentage')
-    plt.title('Final Result Percents by Halftime Lead')
+    if percentage_adjust:
+        plt.ylabel('Result Frequency Percentage')
+        plt.title('Final Result Percents by Halftime Lead')
+    else:
+        plt.ylabel('Result Frequency')
+        plt.title('Final Results by Halftime Lead')
     plt.xlim([-1,6])
     plt.show()

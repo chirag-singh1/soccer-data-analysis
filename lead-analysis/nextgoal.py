@@ -72,13 +72,21 @@ def run_analysis(competitions, percent_adjust):
                 base[i]/=tot_goals[i]
 
     x=np.arange(10)
+
     plt.plot(x,trailing_scores_next, color='red')
-    plt.plot(x,no_score_next, color='yellow')
+    plt.plot(x,no_score_next, color='orange')
     plt.plot(x,leading_scores_next, color='green')
 
-    '''
-    plt.bar(x, trailing_scores_next, color='red')
-    plt.bar(x, no_score_next, bottom=trailing_scores_next, color='yellow')
-    plt.bar(x, leading_scores_next, bottom=base, color='green')
-    '''
+    plt.legend(labels=['Trailing Team Scores Next','No Further Goals','Leading Team Scores Next'])
+    plt.xticks(np.arange(start=0,stop=9))
+    plt.xlim([0,8])
+    plt.xlabel('Goal Deficit')
+    
+    if percent_adjust:
+        plt.ylabel('Next Scorer Probability')
+        plt.title('Next Scorer Probability by Goal Deficit')
+    else:
+        plt.ylabel('Next Scorer')
+        plt.title('Next Scorer by Goal Deficit')
+
     plt.show()
