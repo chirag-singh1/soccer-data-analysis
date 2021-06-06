@@ -13,9 +13,11 @@ class Goal:
         self.prev_goals[team_id1]=team1_goals
         self.prev_goals[team_id2]=team2_goals
 
+#Parses matches, teams and winners into matches dictionary
 def parse_matches(competition):
     matches_file = open(f'../matches_line_breaks/matches_{competition}.json','r')
     matches={}
+
     #Initialize matches (including competiting teams and the winner)
     cl=matches_file.readline()
     while(cl):
@@ -28,6 +30,7 @@ def parse_matches(competition):
         cl=matches_file.readline()
     return matches
 
+#Parses goals into dictionary of list of goals by match
 def parse_goals(competition, matches):
     goals=defaultdict(list)
     events = open(f'../events_line_breaks/events_{competition}.json','r')   
@@ -36,7 +39,7 @@ def parse_goals(competition, matches):
     while(cl):
         curr_line=json.loads(cl)
 
-        if curr_line['eventId'] != 9: #Exclude save attempts that have goal tag
+        if curr_line['eventId'] != 9 and curr_line['matchPeriod'] != 'P': #Exclude save attempts that have goal tag and penalty shootouts
             if sum(1 for x in curr_line['tags']  if x['id']==101) > 0: #Normal goal
                 goals[curr_line['matchId']].append(Goal(curr_line['teamId'],curr_line['matchPeriod'],curr_line['eventSec']))
             elif sum(1 for x in curr_line['tags']  if x['id']==102) > 0: #Own goal (swap team)

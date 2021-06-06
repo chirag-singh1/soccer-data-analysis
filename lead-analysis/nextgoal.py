@@ -2,16 +2,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 import util
 
+#Interprets goal and match records
 def parse_match_records(competition):
     matches=util.parse_matches(competition)
     goals=util.parse_goals(competition, matches)
 
+    #Tracked quantities
     leading_scores_next=[0]*10
     trailing_scores_next=[0]*10
     no_score_next=[0]*10
 
+    #Iterate over each match
     for match in matches.keys():
-        goal_record={}
+        goal_record={} #Initialize record of goals
         
         team_1=matches[match]['teams'][0] 
         team_2=matches[match]['teams'][1]
@@ -19,10 +22,10 @@ def parse_match_records(competition):
         goal_record[team_1]=0
         goal_record[team_2]=0
 
-        for goal in goals[match]:
+        for goal in goals[match]: #Iterate over each goal
             deficit = abs(goal_record[team_1] - goal_record[team_2])
 
-            if goal_record[team_1] > goal_record[team_2]:
+            if goal_record[team_1] > goal_record[team_2]: #Update corresponding statistic
                 if str(goal.team) == team_1:
                     leading_scores_next[deficit]+=1
                 else:
@@ -38,19 +41,20 @@ def parse_match_records(competition):
 
             goal_record[str(goal.team)]+=1
         
-        no_score_next[abs(goal_record[team_1] - goal_record[team_2])]+=1
+        no_score_next[abs(goal_record[team_1] - goal_record[team_2])]+=1 #Corrects for end of game (no more goals scored)
     
-    leading_scores_next[0]=int(leading_scores_next[0]/2) #Corrects for matches tied at halftime
+    leading_scores_next[0]=int(leading_scores_next[0]/2) #Corrects for tied games
     trailing_scores_next[0]=int(trailing_scores_next[0]/2)
 
     return leading_scores_next,trailing_scores_next,no_score_next
 
+#Main driver
 def run_analysis(competitions, percent_adjust):
     leading_scores_next=[0]*10
     trailing_scores_next=[0]*10
     no_score_next=[0]*10
 
-    for competition in competitions:
+    for competition in competitions: #Get values for each competition
         lead,trail,none=parse_match_records(competition)
         leading_scores_next=[a+b for a, b in zip(lead,leading_scores_next)]
         trailing_scores_next=[a+b for a, b in zip(trail,trailing_scores_next)]
@@ -60,27 +64,25 @@ def run_analysis(competitions, percent_adjust):
     print(trailing_scores_next)
     print(no_score_next)
 
-    base=[a+b for a, b in zip(trailing_scores_next,no_score_next)]
-
-    if percent_adjust:
+    if percent_adjust: #Adjust by magnitude if applicable
         tot_goals=[a+b+c for a, b, c in zip(leading_scores_next,trailing_scores_next,no_score_next)]
         for i in range(10):
             if tot_goals[i] > 0:
                 leading_scores_next[i]/=tot_goals[i]
                 trailing_scores_next[i]/=tot_goals[i]
                 no_score_next[i]/=tot_goals[i]
-                base[i]/=tot_goals[i]
 
+    #Plot on graph
     x=np.arange(10)
-
     plt.plot(x,trailing_scores_next, color='red')
     plt.plot(x,no_score_next, color='orange')
     plt.plot(x,leading_scores_next, color='green')
 
+    #Format and label graph
     plt.legend(labels=['Trailing Team Scores Next','No Further Goals','Leading Team Scores Next'])
     plt.xticks(np.arange(start=0,stop=9))
     plt.xlim([0,8])
-    plt.xlabel('Goal Deficit')
+    plt.xlabel('Lead (Goals)')
     
     if percent_adjust:
         plt.ylabel('Next Scorer Probability')
