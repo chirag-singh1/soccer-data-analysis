@@ -1,8 +1,7 @@
 import json
+from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
-import argparse
-from collections import defaultdict
 
 #Helper class to store each goal's set of of information
 class Goal:
@@ -40,8 +39,8 @@ def update_counts(goal_record, team_1, team_2, half_time_lead_count,half_time_le
 
 #Main method to parse the goals/match results of a specific competition
 def parse_match_results(competition):
-    events = open(f'events_line_breaks/events_{competition}.json','r')   
-    matches_file = open(f'matches_line_breaks/matches_{competition}.json','r')
+    events = open(f'../events_line_breaks/events_{competition}.json','r')   
+    matches_file = open(f'../matches_line_breaks/matches_{competition}.json','r')
     
     goals=defaultdict(list)
     matches={}
@@ -108,22 +107,9 @@ def parse_match_results(competition):
 
     return half_time_leading_team_win_count,half_time_draw_count,half_time_leading_team_loss_count,half_time_lead_count, loss_base
 
-if __name__ == '__main__':
-
-    #Setup argument parsing
-    parser=argparse.ArgumentParser(description='Generate a variety of graphics centered around the halftime lead of specific games')
-    parser.add_argument('-A','--percentage_adjust',required=False,nargs=1, default='False', choices=['True','False'])
-    parser.add_argument('-C','--competitions',required=False,nargs='*',default='all',
-    choices=['Spain', 'England', 'France','Germany','Italy','World_Cup','European_Championship'])
-    args = parser.parse_args()
-
-    #Choose competitions based on arguments
-    if args.competitions == 'all':
-        competitions=['Spain', 'England', 'France','Germany','Italy','World_Cup','European_Championship']
-    else:
-        competitions=args.competitions
-    
-    #Initialize metrics
+#Main driver to aggregate results over all competitions and display graph
+def run_analysis(competitions, percentage_adjust):
+        #Initialize metrics
     half_time_leading_team_win_count=[0]*10
     half_time_draw_count=[0]*10
     half_time_leading_team_loss_count=[0]*10
@@ -145,7 +131,7 @@ if __name__ == '__main__':
     print(half_time_lead_count)
 
     #Adjust raw win numbers relative to total number if applicable
-    if args.percentage_adjust[0]=='True':
+    if percentage_adjust=='True':
         for i in range(10):
             if half_time_lead_count[i] > 0:
                 half_time_leading_team_win_count[i]/=half_time_lead_count[i]
