@@ -1,4 +1,3 @@
-from collections import defaultdict
 import matplotlib.pyplot as plt
 import numpy as np
 import util
@@ -69,7 +68,7 @@ def parse_match_results(competition):
 
 #Main driver to aggregate results over all competitions and display graph
 def run_analysis(competitions, percentage_adjust):
-        #Initialize metrics
+    #Initialize metrics
     half_time_leading_team_win_count=[0]*10
     half_time_draw_count=[0]*10
     half_time_leading_team_loss_count=[0]*10
