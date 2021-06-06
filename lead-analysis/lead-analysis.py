@@ -9,7 +9,7 @@ if __name__ == '__main__':
     #Setup argument parsing
     parser=argparse.ArgumentParser(description='Generate a variety of graphics centered around the halftime lead of specific games')
     parser.add_argument('-A','--analysis',required=False,nargs=1, default='halftime-lead', choices=['halftime-lead','halftime-percent-adjusted','next-goal',
-    'next-goal-adjusted', 'shot-frequency','pass-location'])
+    'next-goal-adjusted', 'shot-frequency','pass-location', 'pass-distance'])
     parser.add_argument('-C','--competitions',required=False,nargs='*',default='all',
     choices=['Spain', 'England', 'France','Germany','Italy','World_Cup','European_Championship'])
     args = parser.parse_args()
@@ -32,6 +32,8 @@ if __name__ == '__main__':
     elif args.analysis[0] == 'shot-frequency':
         shot_frequency.run_analysis(competitions)
     elif args.analysis[0] == 'pass-location':
-        pass_location.run_analysis(competitions)
+        pass_location.run_analysis(competitions, 'Location')
+    elif args.analysis[0] == 'pass-distance':
+        pass_location.run_analysis(competitions, 'Distance')
 
         
