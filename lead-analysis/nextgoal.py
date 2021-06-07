@@ -71,6 +71,14 @@ def run_analysis(competitions, percent_adjust):
                 leading_scores_next[i]/=tot_goals[i]
                 trailing_scores_next[i]/=tot_goals[i]
                 no_score_next[i]/=tot_goals[i]
+        out=open('../soccer-analysis-website/src/assets/next_goal_normalized.json','w')
+    else:
+        out=open('../soccer-analysis-website/src/assets/next_goal.json','w')
+    out.write('[')
+    for i in range(9):
+        out.write(f'{{\"name\": {i}, \"leading\": {leading_scores_next[i]}, \"none\": {no_score_next[i]}, \"trailing\": {trailing_scores_next[i]}}},')
+    out.write(f'{{\"name\": {9}, \"leading\": {leading_scores_next[9]}, \"none\": {no_score_next[9]}, \"trailing\": {trailing_scores_next[9]}}}]')
+    out.close()
 
     #Plot on graph
     x=np.arange(10)

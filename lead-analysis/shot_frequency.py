@@ -115,7 +115,7 @@ def run_analysis(competitions):
     print(shots_per_min_leading)
     print(shots_per_min_trailing)
 
-    out=open('../generated_json/shot_frequency.json','w')
+    out=open('../soccer-analysis-website/src/assets/shot_frequency.json','w')
     out.write('[')
     for i in range(9):
         out.write(f'{{\"name\": {i}, \"leading\": {shots_per_min_leading[i]}, \"trailing\": {shots_per_min_trailing[i]}}},')
