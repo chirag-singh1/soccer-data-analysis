@@ -115,6 +115,13 @@ def run_analysis(competitions):
     print(shots_per_min_leading)
     print(shots_per_min_trailing)
 
+    out=open('../generated_json/shot_frequency.json','w')
+    out.write('[')
+    for i in range(9):
+        out.write(f'{{\"name\": {i}, \"leading\": {shots_per_min_leading[i]}, \"trailing\": {shots_per_min_trailing[i]}}},')
+    out.write(f'{{\"name\": 9, \"leading\": {shots_per_min_leading[9]}, \"trailing\": {shots_per_min_trailing[9]}}}]')
+    out.close()
+
     #Plot values
     x=np.arange(10)
     plt.plot(x,shots_per_min_leading, color='green')
