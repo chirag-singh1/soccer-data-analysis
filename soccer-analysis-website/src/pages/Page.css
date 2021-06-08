@@ -8,6 +8,13 @@ body{
     /*overflow-y: hidden;*/
 }
 
+p{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 0px;
+    text-indent: 30px;
+}
+
 .Page{
     background-image: url('../assets/img/background.svg');
     background-size: cover;
@@ -45,4 +52,18 @@ h1{
     background-color: #ededed;
     overflow-y: auto;
     border-radius: 10px;
+}
+
+.SideBySideGraphs{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.GraphContainer{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

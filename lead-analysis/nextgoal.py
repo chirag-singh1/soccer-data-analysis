@@ -75,9 +75,9 @@ def run_analysis(competitions, percent_adjust):
     else:
         out=open('../soccer-analysis-website/src/assets/next_goal.json','w')
     out.write('[')
-    for i in range(9):
-        out.write(f'{{\"name\": {i}, \"leading\": {leading_scores_next[i]}, \"none\": {no_score_next[i]}, \"trailing\": {trailing_scores_next[i]}}},')
-    out.write(f'{{\"name\": {9}, \"leading\": {leading_scores_next[9]}, \"none\": {no_score_next[9]}, \"trailing\": {trailing_scores_next[9]}}}]')
+    for i in range(8):
+        out.write(f'{{\"name\": {i}, \"Leading Team Scores Next\": {leading_scores_next[i]}, \"No More Goals\": {no_score_next[i]}, \"Trailing Team Scores Next\": {trailing_scores_next[i]}}},')
+    out.write(f'{{\"name\": {8}, \"Leading Team Scores Next\": {leading_scores_next[8]}, \"No More Goals\": {no_score_next[8]}, \"Trailing Team Scores Next\": {trailing_scores_next[8]}}}]')
     out.close()
 
     #Plot on graph
