@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+* {
+    margin-top: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body{
+    /*overflow-y: hidden;*/
+}
+
+.Page{
+    background-image: url('../assets/img/background.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1{
+    color: white;
+}
+
+.PageContents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.PagePanels{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.ArticleContents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    position: relative;
+    left: -9vw;
+    background-color: #ededed;
+    overflow-y: auto;
+    border-radius: 10px;
+}
