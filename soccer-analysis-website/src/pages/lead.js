@@ -74,7 +74,7 @@ export default class Lead extends React.Component {
                             <div className='SideBySideGraphs'>
                                 <div className='GraphContainer'>
                                     <h4>Next Goal Scored by Lead</h4>
-                                    <LineChart width={600} height={300} data={next_goal.default}>
+                                    <LineChart width={550} height={300} data={next_goal.default}>
                                         <Line type="monotone" dataKey="Trailing Team Scores Next" stroke="red" />
                                         <Line type="monotone" dataKey="No More Goals" stroke="orange" />
                                         <Line type="monotone" dataKey="Leading Team Scores Next" stroke="green" />
@@ -87,9 +87,9 @@ export default class Lead extends React.Component {
                                         <Tooltip/>
                                     </LineChart>
                                 </div>
-                                <div className='GraphContainer'>
+                                <div className='RightGraphContainer'>
                                     <h4>Next Goal Scored by Lead (as Percentage)</h4>
-                                    <LineChart width={600} height={300} data={next_goal_normalized.default}>
+                                    <LineChart width={550} height={300} data={next_goal_normalized.default}>
                                         <Line type="monotone" dataKey="Trailing Team Scores Next" stroke="red" />
                                         <Line type="monotone" dataKey="No More Goals" stroke="orange" />
                                         <Line type="monotone" dataKey="Leading Team Scores Next" stroke="green" />
@@ -121,45 +121,126 @@ export default class Lead extends React.Component {
                                 and defensive tendencies of teams, especially for uncommon leads. We can use shots per minute as an improved metric for the aggression of leading and trailing teams, grouping
                                 teams by lead to determine how lead magnitude affects the willingnes of teams to attack.
                             </p>
-                            <LineChart width={600} height={300} data={shot_frequency.default}>
-                                    <Line type="monotone" dataKey="trailing" stroke="green" />
-                                    <Line type="monotone" dataKey="leading" stroke="red" />
-                                    <CartesianGrid stroke="#ccc" />
-                                    <XAxis dataKey="name" />
-                                    <Legend/>
-                                    <Tooltip/>
-                                <YAxis />
-                            </LineChart>
-
-                            
-                            <LineChart width={600} height={300} data={pass_distance.default}>
-                                <Line type="monotone" dataKey="trailing" stroke="red" />
-                                <Line type="monotone" dataKey="leading" stroke="green" />
-                                <CartesianGrid stroke="#ccc" />
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                            </LineChart>
-                            <LineChart width={600} height={300} data={pass_location.default}>
-                                <Line type="monotone" dataKey="trailing" stroke="red" />
-                                <Line type="monotone" dataKey="leading" stroke="green" />
-                                <CartesianGrid stroke="#ccc" />
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                            </LineChart>
-                            <LineChart width={600} height={300} data={pass_accuracy.default}>
-                                <Line type="monotone" dataKey="trailing" stroke="red" />
-                                <Line type="monotone" dataKey="leading" stroke="green" />
-                                <CartesianGrid stroke="#ccc" />
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                            </LineChart>
+                            <div class='SingleGraph Right'>
+                                <div class='GraphContainer'>
+                                    <h4>Shots per Minute by Lead</h4>
+                                    <LineChart width={600} height={300} data={shot_frequency.default}>
+                                            <Line type="monotone" dataKey="Shots per Minute Trailing" stroke="red" />
+                                            <Line type="monotone" dataKey="Shots per Minute Leading" stroke="green" />
+                                            <CartesianGrid stroke="#ccc" />
+                                            <XAxis dataKey="name" />
+                                            <Legend/>
+                                            <Tooltip/>
+                                            <YAxis>
+                                                <Label angle={270} position='left' offset={-10} style={{ textAnchor: 'middle' }}>Shots per Minute</Label>
+                                            </YAxis>
+                                        <YAxis />
+                                    </LineChart>
+                                </div>
+                                <div>
+                                    <p>
+                                        As with the previous analysis, we can generally ignore the results for a lead greater than 5 goals because of the small sample size. For leads smaller than 3 goals,
+                                        trailing teams take marginally more shots per minute than leading teams. When extrapolated to a full game, teams trailing by a single goal take 12.5 shots, while 
+                                        leading teams average 11.1 shots. For a 2-goal lead, trailing teams would average 12.7 shots, while leading teams take 12.0 shots. For greater leads, the leading team takes
+                                        the shot advantage, shooting more on a 3-goal lead and significantly more on any larger lead.   
+                                    </p>
+                                    <p>
+                                        While trailing teams shoot slightly more than leading teams, this difference is marginal. In particular, we see that as the leading team grows their advantage,
+                                        they shoot more in comparison with the trailing team, contrary to myth that teams up 2 goals become passive. Trailing teams likely are most aggressive when a single
+                                        goal would be enough to tie the game. Alternatively, a larger lead may simply indicate that the leading team is a much better attacking team than the trailing team. When
+                                        considering offensive output, it appears that a 2-goal lead is actually less dangerous than a 1-goal lead. 
+                                    </p>
+                                </div>
+                            </div>
+                            <p>
+                                While all metrics of offensive output seem to indicate that a 2-goal lead is less dangerous than a 1-goal lead, such metrics are inevitably biased towards better offensive teams.
+                                Teams that are better at converting offensive possession into shots and goals are most likely to open 2-goal leads, making it difficult to compare the offensive output of teams
+                                up or down by any deficit. To analyze the affect of a goal deficit on the playstyle of teams in possession, we can analyze the passing patterns of teams by their lead.  
+                            </p>
+                            <div class='SingleGraph'>
+                                <div>
+                                    <p>
+                                        We can use the average pass start location as an approximation of field position. One would expect trailing teams to play more aggressively, often holding the ball in their opponent's
+                                        half as the leading team is happy to give up possession to protect their lead. The data appears to support this prediction. For a lead of 1 to 3 goals, the trailing team initiates
+                                        their passes an average of approximately 2 yards further up the field. As the lead grows to 3 goals, the leading team generally maintains a similar passing profile, with only a slight
+                                        decrease in pass start advancement. When interpreted as an approximation of field position, this decrease supports the idea that leading teams tend to play less aggressively than their 
+                                        opponents, but does not support the idea that a 2-goal lead is more dangerous than other leads. Because we see a similar difference in pass start location across 1-3 goal leads, there is 
+                                        no evidence to suggest that teams become particularly complacent or aggressive in a game with a 2-goal lead.
+                                    </p>
+                                    <p>
+                                        Pass start location does not provide a complete profile of a team's playstyle or aggression. Losing teams might play longer or less accurate passes that start
+                                        deeper in their half, negatively biasing their pass start location.
+                                    </p>
+                                </div>
+                                <div class='GraphContainer Left'>
+                                    <h4>Mean Pass Start Location by Lead</h4>
+                                    <LineChart width={600} height={300} data={pass_location.default}>
+                                        <Line type="monotone" dataKey="Mean Pass Start when Trailing" stroke="red" />
+                                        <Line type="monotone" dataKey="Mean Pass Start when Leading" stroke="green" />
+                                        <CartesianGrid stroke="#ccc" />
+                                        <XAxis dataKey="name" />
+                                        <Tooltip/>
+                                        <Legend/>
+                                        <YAxis>
+                                            <Label angle={270} position='left' offset={-10} style={{ textAnchor: 'middle' }}>Mean Pass Start Location (yds)</Label>
+                                        </YAxis>
+                                    </LineChart>
+                                </div>
+                            </div>
+                            <p>To further understand how leads affect attacking patterns, I analyzed the mean pass distance and pass location of teams by lead to get a better understanding
+                                of how changing playstyles could bias the starting pass location of teams by lead.
+                            </p>
+                            <div className='SideBySideGraphs'>
+                                <div className='GraphContainer'>
+                                    <h4>Mean Attempted Pass Distance by Lead</h4>
+                                    <LineChart width={550} height={300} data={pass_distance.default}>
+                                        <Line type="monotone" dataKey="Mean Pass Distance when Trailing" stroke="red" />
+                                        <Line type="monotone" dataKey="Mean Pass Distance when Leading" stroke="green" />
+                                        <CartesianGrid stroke="#ccc" />
+                                        <XAxis dataKey="name" />
+                                        <YAxis>
+                                            <Label angle={270} position='left' offset={-10} style={{ textAnchor: 'middle' }}>Mean Pass Distance (yds)</Label>
+                                        </YAxis>
+                                        <Legend/>
+                                        <Tooltip/>
+                                    </LineChart>
+                                </div>
+                                <div className='RightGraphContainer'>
+                                    <h4>Pass Accuracy by Lead</h4>
+                                    <LineChart width={550} height={300} data={pass_accuracy.default}>
+                                        <Line type="monotone" dataKey="Pass Accuracy when Trailing" stroke="red" />
+                                        <Line type="monotone" dataKey="Pass Accuracy when Leading" stroke="green" />
+                                        <CartesianGrid stroke="#ccc" />
+                                        <XAxis dataKey="name" />
+                                        <YAxis>
+                                            <Label angle={270} position='left' offset={-10} style={{ textAnchor: 'middle' }}>Pass Accuracy</Label>
+                                        </YAxis>
+                                        <Legend/>
+                                        <Tooltip/>
+                                    </LineChart>
+                                </div>
+                            </div>
+                            <p>
+                                There is no increase in mean attempted pass distance for trailing teams, suggesting that trailing teams do not significantly increase the number of long
+                                to increase the speed of play. The pass accuracy of trailing teams, which remains approximately constant at around 83.5% for almost any lead, supports this conclusion.
+                                Trailing teams do not try to play significantly more long or risky passes to increase the speed of play or earn an equalizer, which improves confidence in pass start
+                                location as an approximation of field position. For leading teams, larger leads correlate with lower pass distances and higher pass accuracy (with a 2-goal lead), indicating
+                                that leading teams are happy to hold possession with shorter, safer passes. When coupled with the pass start location data, this increase in shorter, safer passes supports
+                                the prediction that leading teams will sit back and defend, choosing to keep possession instead of advancing the ball when they win possession. Overall, analysis of passing 
+                                data indicates that leading teams do play more passively with a 2-goal lead, playing deeper in their own half and holding possession, while trailing teams do not play more aggressively,
+                                but continue to play similar passes from more advanced locations.
+                            </p>
+                            <p>
+                                In conclusion, there is no evidence to suggest that 2-0 is the most dangerous lead or supporting the logic that teams up by 2 goals become complacent and mistake-prone. 
+                                Teams up 2 goals go on to win more games, shoot more, and score more than teams
+                                up by a single goal. While teams up by 2 goals appear to concede marginally more field position to their opponents, they concede less field position than teams up
+                                by a single goal. Trailing teams struggle to convert this advanced field position into shots or goals as their playstyle remains generally unchanged, while leading teams 
+                                play shorter, safer passes to hold possession after turnovers. 
+                            </p>
+                            <div class='Buffer'></div>
                         </div>
                     </div>
                 </div>
-                
-
-            
-
             </div>
         );
     }

@@ -117,9 +117,9 @@ def run_analysis(competitions):
 
     out=open('../soccer-analysis-website/src/assets/shot_frequency.json','w')
     out.write('[')
-    for i in range(9):
-        out.write(f'{{\"name\": {i}, \"leading\": {shots_per_min_leading[i]}, \"trailing\": {shots_per_min_trailing[i]}}},')
-    out.write(f'{{\"name\": 9, \"leading\": {shots_per_min_leading[9]}, \"trailing\": {shots_per_min_trailing[9]}}}]')
+    for i in range(8):
+        out.write(f'{{\"name\": {i}, \"Shots per Minute Leading\": {shots_per_min_leading[i]}, \"Shots per Minute Trailing\": {shots_per_min_trailing[i]}}},')
+    out.write(f'{{\"name\": 8, \"Shots per Minute Leading\": {shots_per_min_leading[8]}, \"Shots per Minute Trailing\": {shots_per_min_trailing[8]}}}]')
     out.close()
 
     #Plot values

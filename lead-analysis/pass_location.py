@@ -130,9 +130,9 @@ def run_analysis(competitions, mode):
 
         out=open('../soccer-analysis-website/src/assets/pass_location.json','w')
         out.write('[')
-        for i in range(9):
-            out.write(f'{{\"name\": {i}, \"leading\": {pass_x_leading[i]}, \"trailing\": {pass_x_trailing[i]}}},')
-        out.write(f'{{\"name\": 9, \"leading\": {pass_x_leading[9]}, \"trailing\": {pass_x_trailing[9]}}}]')
+        for i in range(8):
+            out.write(f'{{\"name\": {i}, \"Mean Pass Start when Leading\": {pass_x_leading[i]}, \"Mean Pass Start when Trailing\": {pass_x_trailing[i]}}},')
+        out.write(f'{{\"name\": 8, \"Mean Pass Start when Leading\": {pass_x_leading[8]}, \"Mean Pass Start when Trailing\": {pass_x_trailing[8]}}}]')
         out.close()
 
         x=np.arange(0,10)
@@ -153,9 +153,9 @@ def run_analysis(competitions, mode):
 
         out=open('../soccer-analysis-website/src/assets/pass_accuracy.json','w')
         out.write('[')
-        for i in range(9):
-            out.write(f'{{\"name\": {i}, \"leading\": {pass_success_leading[i]}, \"trailing\": {pass_success_trailing[i]}}},')
-        out.write(f'{{\"name\": 9, \"leading\": {pass_success_leading[9]}, \"trailing\": {pass_success_trailing[9]}}}]')
+        for i in range(8):
+            out.write(f'{{\"name\": {i}, \"Pass Accuracy when Leading\": {pass_success_leading[i]}, \"Pass Accuracy when Trailing\": {pass_success_trailing[i]}}},')
+        out.write(f'{{\"name\": 8, \"Pass Accuracy when Leading\": {pass_success_leading[8]}, \"Pass Accuracy when Trailing\": {pass_success_trailing[8]}}}]')
         out.close()
 
         x=np.arange(0,10)
@@ -177,9 +177,9 @@ def run_analysis(competitions, mode):
         out=open('../soccer-analysis-website/src/assets/pass_distance.json','w')
         out.write('[')
 
-        for i in range(9):
-            out.write(f'{{\"name\": {i}, \"leading\": {pass_dist_leading[i]}, \"trailing\": {pass_dist_trailing[i]}}},')
-        out.write(f'{{\"name\": 9, \"leading\": {pass_dist_leading[9]}, \"trailing\": {pass_dist_trailing[9]}}}]')
+        for i in range(8):
+            out.write(f'{{\"name\": {i}, \"Mean Pass Distance when Leading\": {pass_dist_leading[i]}, \"Mean Pass Distance when Trailing\": {pass_dist_trailing[i]}}},')
+        out.write(f'{{\"name\": 8, \"Mean Pass Distance when Leading\": {pass_dist_leading[8]}, \"Mean Pass Distance when Trailing\": {pass_dist_trailing[8]}}}]')
 
         out.close()
 
