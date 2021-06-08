@@ -128,6 +128,13 @@ def run_analysis(competitions, mode):
         print(pass_x_leading)
         print(pass_x_trailing)
 
+        out=open('../soccer-analysis-website/src/assets/pass_location.json','w')
+        out.write('[')
+        for i in range(9):
+            out.write(f'{{\"name\": {i}, \"leading\": {pass_x_leading[i]}, \"trailing\": {pass_x_trailing[i]}}},')
+        out.write(f'{{\"name\": 9, \"leading\": {pass_x_leading[9]}, \"trailing\": {pass_x_trailing[9]}}}]')
+        out.close()
+
         x=np.arange(0,10)
         plt.plot(x,pass_x_leading,color='green')
         plt.plot(x,pass_x_trailing,color='red')
@@ -143,6 +150,13 @@ def run_analysis(competitions, mode):
     if mode == 'Accuracy':
         print(pass_success_trailing)
         print(pass_success_leading)
+
+        out=open('../soccer-analysis-website/src/assets/pass_accuracy.json','w')
+        out.write('[')
+        for i in range(9):
+            out.write(f'{{\"name\": {i}, \"leading\": {pass_success_leading[i]}, \"trailing\": {pass_success_trailing[i]}}},')
+        out.write(f'{{\"name\": 9, \"leading\": {pass_success_leading[9]}, \"trailing\": {pass_success_trailing[9]}}}]')
+        out.close()
 
         x=np.arange(0,10)
         plt.plot(x,pass_success_leading,color='green')
@@ -160,6 +174,15 @@ def run_analysis(competitions, mode):
         print(pass_dist_leading)
         print(pass_dist_trailing)
 
+        out=open('../soccer-analysis-website/src/assets/pass_distance.json','w')
+        out.write('[')
+
+        for i in range(9):
+            out.write(f'{{\"name\": {i}, \"leading\": {pass_dist_leading[i]}, \"trailing\": {pass_dist_trailing[i]}}},')
+        out.write(f'{{\"name\": 9, \"leading\": {pass_dist_leading[9]}, \"trailing\": {pass_dist_trailing[9]}}}]')
+
+        out.close()
+
         x=np.arange(0,10)
         plt.plot(x,pass_dist_leading,color='green')
         plt.plot(x,pass_dist_trailing,color='red')
@@ -171,3 +194,4 @@ def run_analysis(competitions, mode):
         plt.title('Pass Distance by Lead')
         plt.legend(labels=['Leading Team','Trailing Team'])
         plt.show()
+

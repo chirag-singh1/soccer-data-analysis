@@ -97,6 +97,20 @@ def run_analysis(competitions, percentage_adjust):
                 half_time_draw_count[i]/=half_time_lead_count[i]
                 half_time_leading_team_loss_count[i]/=half_time_lead_count[i]
                 loss_base[i]/=half_time_lead_count[i]
+        
+        out=open('../soccer-analysis-website/src/assets/halftime_normalized.json','w')
+        out.write('[')
+        for i in range(9):
+            out.write(f'{{\"name\": {i}, \"leading\": {half_time_leading_team_win_count[i]}, \"draw\": {half_time_draw_count[i]}, \"trailing\": {half_time_leading_team_loss_count[i]}}},')
+        out.write(f'{{\"name\": {9}, \"leading\": {half_time_leading_team_win_count[9]}, \"draw\": {half_time_draw_count[i]}, \"trailing\": {half_time_leading_team_loss_count[9]}}}]')
+        out.close()
+    else:
+        out=open('../soccer-analysis-website/src/assets/halftime_lead.json','w')
+        out.write('[')
+        for i in range(9):
+            out.write(f'{{\"name\": {i}, \"leading\": {half_time_leading_team_win_count[i]}, \"draw\": {half_time_draw_count[i]}, \"trailing\": {half_time_leading_team_loss_count[i]}}},')
+        out.write(f'{{\"name\": {9}, \"leading\": {half_time_leading_team_win_count[9]}, \"draw\": {half_time_draw_count[i]}, \"trailing\": {half_time_leading_team_loss_count[9]}}}]')
+        out.close()
 
     #Place bars on graph
     x=np.arange(10)
