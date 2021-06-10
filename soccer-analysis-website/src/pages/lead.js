@@ -1,4 +1,5 @@
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, BarChart, Bar, Legend, Label, Tooltip } from 'recharts';
+import { Link } from 'react-router-dom';
 import * as shot_frequency from '../assets/shot_frequency.json'
 import * as next_goal from '../assets/next_goal.json'
 import * as next_goal_normalized from '../assets/next_goal_normalized.json'
@@ -16,10 +17,18 @@ export default class Lead extends React.Component {
         return (
             <div class='Page'>
                 <div class='PageContents'>
-                    <h1>Title</h1>
+                    <div class = 'NavBar'>
+                        <h1 class='PageTitle'>Soccer Myths: True or False</h1>
+                        <div class = 'NavigationElements'>
+                            <a href='/'>Home</a>
+                            <a href='/articles'>Articles</a>
+                            <a href='/about'>About</a>
+                        </div>
+                    </div>
                     <div class = 'PagePanels'>
                         <div class='ArticleContents'>
-                            <h2>Is 2-0 really the most dangerous lead?</h2>
+                            <div class='FlexContainer'>
+                            <h2 class='ArticleTitle'>Is 2-0 really the most dangerous lead?</h2>
                             <p>Almost every soccer player has heard the myth that a 2-0 lead is the most dangerous lead. Conventional wisdom holds that
                                 a team with a 2-goal lead will become complacent and sloppy, potentially letting a trailing, but motivated, team back
                                 into the game. But does this logic hold up to real match data?
@@ -238,8 +247,20 @@ export default class Lead extends React.Component {
                                 play shorter, safer passes to hold possession after turnovers. 
                             </p>
                             <div class='Buffer'></div>
+                            </div>
                         </div>
-                    </div>
+                        <div class='RightBar'>
+                            <div class='MoreArticles'>
+                                <h4 class='RightBarTitle'>More Articles</h4>
+                            </div>
+                            <div class = 'About'>
+                                <h4 class='RightBarTitle'>About</h4>
+                                <p class='SidebarText'>All code used to conduct this analysis (and display this website!) is hosted publicly on Github. </p>
+                                <a href='https://github.com/chirag-singh1/soccer-data-analysis'><button>View Github Repository</button></a>
+                                <Link to='/about'> <button class='BottomSidebarButton'>More Development Info</button></Link>
+                            </div>
+                        </div>
+                    </div>    
                 </div>
             </div>
         );
