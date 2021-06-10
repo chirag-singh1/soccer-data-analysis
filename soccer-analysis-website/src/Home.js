@@ -1,11 +1,22 @@
 import './Home.css';
 import lead_graphic from './assets/img/lead_graphic.png';
 import placeholder from './assets/img/placeholder.PNG';
+import { Link } from 'react-router-dom';
 
 export default function Home(){
     return (
         <div class='Home'>
+            <div class='content'>
             <h1 class='WebsiteTitle'>Analyzing Soccer: A Data Driven Approach</h1>
+            <div class='AboutBar'>
+                <div class='AboutText'>
+                    <h2 class='AboutTitle'>About this Project</h2>
+                    <p class='AboutText'>This project is a compilation of analysis done on the public dataset </p>
+                    <Link to='/about'> <button class='AboutButton'>More Development Info &nbsp;<i class='arrow'></i></button></Link>
+                </div>
+                <img class='AboutImage' src={placeholder}></img>
+            </div>
+            <h2 class='ArticlesTitle'>Recent Features:</h2>
             <div class='Articles'>
                 <a class='ArticleLink' href='/articles/lead'>
                     <div class='ArticleFeature'>
@@ -55,6 +66,7 @@ export default function Home(){
                         and trailing teams by deficit MORE TEXT AAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAA AAAAAAAAAAAA AAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAA</p>
                     </div>
                 </a>
+            </div>
             </div>
         </div>
     );

@@ -8,7 +8,25 @@
 
 .WebsiteTitle{
     color: #ededed;
+    background-color: #424242;
     text-align: center;
+    padding: 20px 60px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: -6px 5px 9px 0px rgba(0,0,0,0.77);
+}
+
+.ArticlesTitle{
+    align-self: start;
+    color: #ededed;
+    background-color: #424242;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    box-shadow: -6px 5px 9px 0px rgba(0,0,0,0.77);
 }
 
 .ArticleFeature{
@@ -59,6 +77,51 @@
     display: grid;
     grid-template-columns: 33vw auto 33vw;
     justify-items: center;
-    height: 90vh;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
     overflow-y: auto;
+}
+
+.AboutBar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-end;
+    background-color: #424242;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.AboutText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.AboutTitle{
+    color: #ededed;
+}
+
+.arrow{
+    border: solid #ededed;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.AboutText{
+    color: #ededed;
+}
+
+.AboutImage{
+    margin: 10px;
 }
