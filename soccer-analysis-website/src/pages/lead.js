@@ -18,7 +18,7 @@ export default class Lead extends React.Component {
             <div class='Page'>
                 <div class='PageContents'>
                     <div class = 'NavBar'>
-                        <h1 class='PageTitle'>Soccer Myths: True or False</h1>
+                        <h1 class='PageTitle'>Analyzing Soccer: A Data Driven Approach</h1>
                         <div class = 'NavigationElements'>
                             <a href='/'>Home</a>
                             <a href='/articles'>Articles</a>
