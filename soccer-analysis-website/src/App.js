@@ -7,7 +7,7 @@ export default function App() {
   return (
     <Router>
       <Switch>
-      <Route path='/lead'>
+      <Route path='/articles/lead'>
         <Lead/>
       </Route>
       <Route path='/'>

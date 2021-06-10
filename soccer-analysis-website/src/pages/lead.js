@@ -252,6 +252,8 @@ export default class Lead extends React.Component {
                         <div class='RightBar'>
                             <div class='MoreArticles'>
                                 <h4 class='RightBarTitle'>More Articles</h4>
+                                <Link to='/'><button class='MoreButton'>Defensive Comparisons across Leagues<i class='arrow'></i></button></Link>   
+                                <div class='SmallBuffer'></div>                      
                             </div>
                             <div class = 'About'>
                                 <h4 class='RightBarTitle'>About</h4>
