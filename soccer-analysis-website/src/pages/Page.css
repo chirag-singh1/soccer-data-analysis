@@ -241,3 +241,9 @@ button:hover{
 .SmallBuffer{
     margin-bottom: 4px;
 }
+
+Link{
+    color: #424242;
+    text-decoration:none;
+}
+
