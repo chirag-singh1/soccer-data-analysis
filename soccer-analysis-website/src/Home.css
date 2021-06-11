@@ -94,7 +94,8 @@
     justify-content: center;
     align-self: flex-end;
     background-color: #424242;
-    border-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
     margin-bottom: 15px;
 }
 
@@ -107,6 +108,7 @@
 
 .AboutTitle{
     color: #ededed;
+    margin-bottom: 0;
 }
 
 .arrow{
@@ -120,8 +122,15 @@
 
 .AboutText{
     color: #ededed;
+    width: 32vw;
+    text-indent: 0;
+    margin: 10px;
 }
 
 .AboutImage{
     margin: 10px;
+}
+
+.AboutButton{
+    margin-top: 10px;
 }

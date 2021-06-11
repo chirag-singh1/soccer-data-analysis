@@ -11,8 +11,14 @@ export default function Home(){
             <div class='AboutBar'>
                 <div class='AboutText'>
                     <h2 class='AboutTitle'>About this Project</h2>
-                    <p class='AboutText'>This project is a compilation of analysis done on the public dataset </p>
+                    <p class='AboutText'>This project is a compilation of analysis done on a public dataset created in 2019 by Wyscout and University of Pisa researchers. 
+                    The content of the dataset was parsed using a variety of Python scripts to generate processed JSON objects to be displayed as graphs. 
+                    The scripts used to generate all of the necessary JSON files displayed, generated JSON files, and the source code for this website can all 
+                    be found in the project Github repository.
+                    </p>
                     <Link to='/about'> <button class='AboutButton'>More Development Info &nbsp;<i class='arrow'></i></button></Link>
+                    <a href='https://github.com/chirag-singh1/soccer-data-analysis'> <button class='AboutButton'>View Project Repository &nbsp;<i class='arrow'></i></button></a>
+                    <a href='https://forms.gle/NqGGq9uoCxyfrrFXA'> <button class='AboutButton'>Suggest a Topic &nbsp;<i class='arrow'></i></button></a>
                 </div>
                 <img class='AboutImage' src={placeholder}></img>
             </div>
