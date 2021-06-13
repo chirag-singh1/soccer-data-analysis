@@ -1,5 +1,6 @@
 import json
 import matplotlib.pyplot as plt
+import numpy as np
 
 def process_all(match,team,player,goal):
     competitions=['Spain', 'England', 'France','Germany','Italy','World_Cup','European_Championship']
@@ -52,7 +53,14 @@ def run_analysis(competition,match,team,player,goal,show_buildup):
             if event['subEventId'] == 34:
                 temp_x[0]=0
                 temp_y[0]=50
-            ax.arrow(temp_x[0],temp_y[0],temp_x[1]-temp_x[0],temp_y[1]-temp_y[0],head_width=2.0,head_length=2.0)
+            
+            ax.plot(temp_x,temp_y)
+            
+            if event['eventId'] == 8:
+                slope=(temp_y[1]-temp_y[0])/(temp_x[1]-temp_x[0])
+                dx=np.sqrt(0.001**2/(1+slope**2))*(temp_x[1]-temp_x[0])/abs(temp_x[1]-temp_x[0])
+                dy=slope*dx
+                ax.arrow((temp_x[0]+temp_x[1])/2.0,(temp_y[0]+temp_y[1])/2.0,dx,dy,head_width=1.0,head_length=1.0)
 
     ax.scatter(shot_x,shot_y)
 
