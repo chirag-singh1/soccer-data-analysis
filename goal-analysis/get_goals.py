@@ -3,25 +3,54 @@ import matplotlib.pyplot as plt
 
 def process_all(match,team,player):
     competitions=['Spain', 'England', 'France','Germany','Italy','World_Cup','European_Championship']
+    goal_buildup=[]
     shot_x=[]
     shot_y=[]
 
     for competition in competitions:
-        temp_x,temp_y=process_competition(competition,match,team,player)
+        temp_goal,temp_x,temp_y=process_competition(competition,match,team,player)
         shot_x+=temp_x
         shot_y+=temp_y
+        goal_buildup+=temp_goal
 
     return shot_x,shot_y
 
-def run_analysis(competition,match,team,player):
+def run_analysis(competition,match,team,player,goal,show_buildup):
     if competition == 'all':
-        shot_x, shot_y = process_all(match,team,player)
+        goal_buildup,shot_x, shot_y = process_all(match,team,player,goal)
     else:
-        shot_x,shot_y=process_competition(competition,match,team,player)
+        goal_buildup,shot_x,shot_y=process_competition(competition,match,team,player,goal)
+
+    if goal + 1 >= len(shot_x):
+        print('Invalid goal selected')
+        exit(1)
+    elif goal != 0:
+        shot_x=shot_x[goal+1]
+        shot_y=shot_y[goal+1]
+        goal_buildup=goal_buildup[goal+1]
 
     ax=plt.figure().add_subplot()
     ax.set_aspect(aspect=0.625)
-    
+
+    if show_buildup == 'True':
+        if goal == 0:
+            print('Cannot show buildup for multiple goals')
+            exit(1)
+
+        scoring_team_id=goal_buildup[len(goal_buildup)-1]['teamId']
+        for i in range(len(goal_buildup)-1):
+            event=goal_buildup[i]
+            temp_x=[]
+            temp_y=[]
+            for pos in event['positions']:
+                if scoring_team_id == event['teamId']:
+                    temp_y.append(100-pos['y'])
+                    temp_x.append(pos['x'])
+                else:
+                    temp_y.append(pos['y'])
+                    temp_x.append(100-pos['x'])
+            ax.plot(temp_x,temp_y)
+
     ax.scatter(shot_x,shot_y)
 
     center_x1, center_y1 = [50,50],[0,100]
@@ -38,7 +67,7 @@ def run_analysis(competition,match,team,player):
     plt.ylim([0,100])
     plt.show()
 
-def process_competition(competition,match,team,player):
+def process_competition(competition,match,team,player,goal):
 
     events = open(f'../events_line_breaks/events_{competition}.json','r')
     cl = events.readline()
@@ -54,10 +83,13 @@ def process_competition(competition,match,team,player):
         curr_line=json.loads(cl)
 
         if match != 0 and curr_line['matchId'] != match:
-            while curr_line['matchId'] != match:
-                cl=events.readline()
+            while cl and curr_line['matchId'] != match:
                 curr_line=json.loads(cl)
+                cl=events.readline()
+
             curr_buildup=[] 
+            if not cl:
+                break
         
         if curr_line['eventId'] == 3:
             curr_buildup=[]
@@ -79,9 +111,17 @@ def process_competition(competition,match,team,player):
 
         cl=events.readline()
 
-    for goal in goal_buildup:
-        for step in goal:
-            print(step)
-        print('\n\n')
+    if goal == 0:
+        for goal in goal_buildup:
+            for step in goal:
+                print(step)
+            print('')
+    else:
+        if goal + 1 >= len(goal_buildup):
+            print('Invalid goal selected')
+            exit(1)
+        else:
+            for step in goal_buildup[goal+1]:
+                print(step)
 
-    return shot_x, shot_y
+    return goal_buildup,shot_x, shot_y
