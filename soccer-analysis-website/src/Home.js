@@ -1,6 +1,7 @@
 import './Home.css';
 import lead_graphic from './assets/img/lead_graphic.png';
 import placeholder from './assets/img/placeholder.PNG';
+import spain_portugal_thumbnail from './assets/img/spain_portugal_thumbnail.jpg';
 import { Link } from 'react-router-dom';
 
 export default function Home(){
@@ -32,12 +33,11 @@ export default function Home(){
                         and trailing teams by deficit</p>
                     </div>
                 </a>
-                <a class='ArticleLink' href='/articles/league-defending'>
+                <a class='ArticleLink' href='/articles/spain-portugal'>
                     <div class='ArticleFeature'>
-                        <h4 class='ArticleFeatureTitle'>Is 2-0 really the most dangerous lead?</h4>
-                        <img class='FeatureArticleThumbnail' src={placeholder}></img>
-                        <p class='FeatureArticleDescription'>An in-depth look at one of soccer's most famous myths, analyzing the attacking patterns of leading
-                        and trailing teams by deficit</p>
+                        <h4 class='ArticleFeatureTitle'>Spain and Portugal's 3 - 3 World Cup Draw</h4>
+                        <img class='FeatureArticleThumbnail' src={spain_portugal_thumbnail}></img>
+                        <p class='FeatureArticleDescription'>Revisiting one of the most iconic World Cup group stage matches through the buildup to each of the 6 goals</p>
                     </div>
                 </a>
                 <a class='ArticleLink' href='/articles/league-defending'>
@@ -73,6 +73,10 @@ export default function Home(){
                     </div>
                 </a>
             </div>
+            <div class='footer'>
+                <p>Photos courtesy of AFP</p>
+            </div>
+
             </div>
         </div>
     );

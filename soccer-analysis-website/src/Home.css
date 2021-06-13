@@ -134,3 +134,12 @@
 .AboutButton{
     margin-top: 10px;
 }
+
+.footer{
+    color: #ededed;
+    background-color: #424242;
+    width: 90%;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
