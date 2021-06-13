@@ -1,14 +1,14 @@
 import json
 import matplotlib.pyplot as plt
 
-def process_all(match,team,player):
+def process_all(match,team,player,goal):
     competitions=['Spain', 'England', 'France','Germany','Italy','World_Cup','European_Championship']
     goal_buildup=[]
     shot_x=[]
     shot_y=[]
 
     for competition in competitions:
-        temp_goal,temp_x,temp_y=process_competition(competition,match,team,player)
+        temp_goal,temp_x,temp_y=process_competition(competition,match,team,player,goal)
         shot_x+=temp_x
         shot_y+=temp_y
         goal_buildup+=temp_goal
@@ -49,7 +49,10 @@ def run_analysis(competition,match,team,player,goal,show_buildup):
                 else:
                     temp_y.append(pos['y'])
                     temp_x.append(100-pos['x'])
-            ax.plot(temp_x,temp_y)
+            if event['subEventId'] == 34:
+                temp_x[0]=0
+                temp_y[0]=50
+            ax.arrow(temp_x[0],temp_y[0],temp_x[1]-temp_x[0],temp_y[1]-temp_y[0],head_width=2.0,head_length=2.0)
 
     ax.scatter(shot_x,shot_y)
 
