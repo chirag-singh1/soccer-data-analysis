@@ -22,6 +22,19 @@ def run_analysis(competition,match,team,player,goal,show_buildup):
     else:
         goal_buildup,shot_x,shot_y=process_competition(competition,match,team,player,goal)
 
+    if goal == 0:
+        for goal in goal_buildup:
+            for step in goal:
+                print(step)
+            print('')
+    else:
+        if goal + 1 >= len(goal_buildup):
+            print('Invalid goal selected')
+            exit(1)
+        else:
+            for step in goal_buildup[goal+1]:
+                print(step)
+
     if goal + 1 >= len(shot_x):
         print('Invalid goal selected')
         exit(1)
@@ -54,7 +67,10 @@ def run_analysis(competition,match,team,player,goal,show_buildup):
                 temp_x[0]=0
                 temp_y[0]=50
             
-            ax.plot(temp_x,temp_y)
+            if event['teamId'] == scoring_team_id:
+                ax.plot(temp_x,temp_y, color='green')
+            else:
+                ax.plot(temp_x,temp_y,color='red')
             
             if event['eventId'] == 8:
                 slope=(temp_y[1]-temp_y[0])/(temp_x[1]-temp_x[0])
@@ -121,18 +137,5 @@ def process_competition(competition,match,team,player,goal):
             curr_buildup=[]
 
         cl=events.readline()
-
-    if goal == 0:
-        for goal in goal_buildup:
-            for step in goal:
-                print(step)
-            print('')
-    else:
-        if goal + 1 >= len(goal_buildup):
-            print('Invalid goal selected')
-            exit(1)
-        else:
-            for step in goal_buildup[goal+1]:
-                print(step)
 
     return goal_buildup,shot_x, shot_y
